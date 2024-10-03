@@ -42,16 +42,13 @@ st.divider()
 with st.sidebar.form("user"):
     
     # define state
-    def keys_action():
-        if "_from_" not in st.session_state:
-            st.session_state._from_ = None
-    
-        if "_to_" not in st.session_state:
-            st.session_state._to_ = None
+    if "_from_" not in st.session_state:
+        st.session_state._from_ = None
+
+    if "_to_" not in st.session_state:
+        st.session_state._to_ = None
             
             
-        # if "bustype" not in st.session_state:
-        #     st.session_state.bustype = None
     
     # from
     route_name = df['Route_Name'].unique()
@@ -66,11 +63,9 @@ with st.sidebar.form("user"):
     to_.sort()
     user_destination = st.selectbox(":red[ :material/directions_bus:  **To**]", to_, key='_to_', index=None)
     
-    # bus type
-    # bus_type = st.radio("Select Bus Type", options=["SEATER", "SLEEPER", "AC", "NONAC"], key="bustype", horizontal=True )
-        
+   
     
-    submitted = st.form_submit_button(" :material/search:  Search buses", type="primary", use_container_width=True, on_click=keys_action)
+    submitted = st.form_submit_button(" :material/search:  Search buses", type="primary", use_container_width=True)
  
 
 
@@ -82,21 +77,25 @@ if (st.session_state._from_ is not None) and ( st.session_state._to_ is not None
     
     with st.sidebar.container(height=300):
 
-        tab1, tab2  = st.tabs(["Rating", "Price"])
+        tab1, tab2, tab3  = st.tabs(["Rating", "Price", "Bus Type"])
 
-        rating = tab1.radio(":red[ :material/star_rate:]  **Rating**", ["⭐ 1", "⭐⭐ 2", "⭐⭐⭐ 3", "⭐⭐⭐⭐ 4", "⭐⭐⭐⭐⭐ 5"],index=4   ,  horizontal=False)
-        rating = int(rating.split()[1])
-        bus_data = bus_data[bus_data['star_rating'] <= rating].sort_values(by='star_rating', ascending=False)
-    
+        rating = tab1.radio(":red[ :material/star_rate:]  **Rating**", ["⭐ 1", "⭐⭐ 2", "⭐⭐⭐ 3", "⭐⭐⭐⭐ 4", "⭐⭐⭐⭐⭐ 5"],index=None   ,  horizontal=False)
+        if rating:
+            rating = int(rating.split()[1])
+            bus_data = bus_data[bus_data['star_rating'] <= rating].sort_values(by='star_rating', ascending=False)
+
+        # --------------- tab2-------------
         # filter the bus details by price
-        price_range = tab2.slider(" :green[:material/currency_rupee:] **Price Range**", min_value=100, max_value=5000, value=(500, 3500), step=100)
+        price_range = tab2.slider(" :green[:material/currency_rupee:] **Price Range**", min_value=100, max_value=5000,
+                                  value=(),step=100)
+        
         
         
         # Filter the bus data by the selected price range
         filtered_data  = bus_data[(bus_data['price'] >= price_range[0]) & (bus_data['price'] <= price_range[1])]
 
         # Dropdown for sorting order
-        sort_order = tab2.selectbox("Sort By",["Low to High", "High to Low"])
+        sort_order = tab2.selectbox("Sort By",["Low to High", "High to Low"])cl
         
         
         # Sort the filtered data based on the user's selection
@@ -105,7 +104,21 @@ if (st.session_state._from_ is not None) and ( st.session_state._to_ is not None
         else:
             bus_data = filtered_data.sort_values(by='price', ascending=False)
             
-            
+        # ----------------- tab3 --------------
+        # bus type
+        bus_type = tab3.radio("Select Bus Type", options=["SEATER", "SLEEPER", "AC", "NONAC"],index=None)
+        
+        # Filtering based on the selected bus type
+        if bus_type == "SEATER":
+            bus_data = bus_data[bus_data['bus_type'].str.contains('Seater', case=False)]
+        elif bus_type == "SLEEPER":
+            bus_data = bus_data[bus_data['bus_type'].str.contains('Sleeper', case=False)]
+        elif bus_type == "AC":
+            bus_data = bus_data[bus_data['bus_type'].str.contains('AC|A/C', case=False)]
+        elif bus_type == "NONAC":
+            bus_data = bus_data[bus_data['bus_type'].str.contains('Non AC|NON A/C', case=False)]
+        
+        
     
     # Display route and total buses information
     col1, col2 = st.columns([3,1])
