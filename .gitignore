@@ -1,0 +1,6 @@
+.vscode/
+*.docx
+
+# files to ignore
+project_workout.ipynb
+Requirement.md
