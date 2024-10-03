@@ -95,7 +95,7 @@ if (st.session_state._from_ is not None) and ( st.session_state._to_ is not None
         filtered_data  = bus_data[(bus_data['price'] >= price_range[0]) & (bus_data['price'] <= price_range[1])]
 
         # Dropdown for sorting order
-        sort_order = tab2.selectbox("Sort By",["Low to High", "High to Low"])cl
+        sort_order = tab2.selectbox("Sort By",["Low to High", "High to Low"])
         
         
         # Sort the filtered data based on the user's selection
