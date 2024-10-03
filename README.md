@@ -1,5 +1,8 @@
 # Redbus Streamlit application 
 
+## Demo App
+
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://redbus-app.streamlit.app/)
 
 Description of the app ...
 ## Project Title :  `Redbus Data Scraping with Selenium & Dynamic Filtering using Streamlit`
@@ -25,8 +28,6 @@ Description of the app ...
   - _Price_, 
   - _Seat-availability_.
 
-## Demo App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://redbus_app.streamlit.app/)
 
 
