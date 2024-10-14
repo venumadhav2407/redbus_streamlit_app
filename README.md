@@ -10,6 +10,12 @@
 Description of the app ...
 ## Project Title :  `Redbus Data Scraping with Selenium & Dynamic Filtering using Streamlit`
 ## Domain : Transportation
+## You should aim to:
+Successfully scrape a minimum of 10 Government State Bus Transport data from Redbus website using Selenium. Also include the private bus information for the selected routes.
+Store the data in a structured SQL database.
+Develop an interactive Streamlit application for data filtering.
+Ensure the application is user-friendly and efficient.
+
 
 
 ## Overview
