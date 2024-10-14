@@ -28,6 +28,7 @@ Description of the app ...
   - _Price_, 
   - _Seat-availability_.
 
+**Reference**:
+- https://github.com/Tharanipriyadevi/Red_bus
 
-
-
+&copy; 2024
