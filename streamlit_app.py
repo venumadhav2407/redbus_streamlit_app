@@ -95,7 +95,7 @@ if (st.session_state._from_ is not None) and ( st.session_state._to_ is not None
         filtered_data  = bus_data[(bus_data['price'] >= price_range[0]) & (bus_data['price'] <= price_range[1])]
 
         # Dropdown for sorting order
-        sort_order = tab2.selectbox("Sort By",["Low to High", "High to Low"])cl
+        sort_order = tab2.selectbox("Sort By",["Low to High", "High to Low"])
         
         
         # Sort the filtered data based on the user's selection
@@ -130,23 +130,11 @@ if (st.session_state._from_ is not None) and ( st.session_state._to_ is not None
     if not bus_data.empty: 
 
     
-        with st.container():
-                        
-            for index, row in bus_data.iterrows():
-                            
-                with st.expander(f"{row['bus_name']}", expanded=True, icon=":material/directions_bus:"):
-                    st.link_button(f" {row['bus_name']} :material/link:", row['route_link'])
-                    
-                    # split the two half
-                    col1, col2 = st.columns([3,1])
-                    
-                    col1.write(f" **{row['departing_time']}** :grey[--->] {row['reaching_time']} ")
-                    col1.write(f" **{row['duration']}** ")
-                    col1.write(f"{row['bus_type']}")
-                    
-                    col2.write(f" ### :green[:material/currency_rupee:]  {row['price']}")
-                    col2.write(f" :red[:material/star_rate:] {row['star_rating']}")
-                    col2.write(f"{row['seat_availability']} Seats")
+        st.dataframe(bus_data.iloc[:, 1:], hide_index=True, column_config={
+            "route_link" : st.column_config.LinkColumn("route_link"),
+            "price" : st.column_config.NumberColumn("price", format="₹ %d")
+        })            
+     
     else:
         st.markdown(
             """
