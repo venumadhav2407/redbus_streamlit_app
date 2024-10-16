@@ -5,6 +5,9 @@
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://redbus-app.streamlit.app/)
 
 ![image](https://github.com/user-attachments/assets/5ed1f227-0860-4a25-8ddd-02465ff8b4b5)
+![image](https://github.com/user-attachments/assets/d3c54f06-1a08-45d4-b212-db2b97951060)
+![image](https://github.com/user-attachments/assets/3c00f4cb-6715-4526-8556-8f2d48ca2311)
+![image](https://github.com/user-attachments/assets/8a12f176-a214-4fea-83bb-d39b0cec2d14)
 
 
 Description of the app ...
