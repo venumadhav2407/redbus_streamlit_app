@@ -3,4 +3,3 @@ streamlit_option_menu
 pandas
 seaborn
 matplotlib
-sqlite3
